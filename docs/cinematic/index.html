@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0908" />
+    <meta name="description" content="Кинематографичное портфолио Mafiacjeck — сайты и цифровой дизайн для Кыргызстана и СНГ." />
+    <meta property="og:title" content="Mafiacjeck — Cinematic Portfolio" />
+    <meta property="og:description" content="Дизайн и разработка сайтов для Кыргызстана и СНГ от 5 000 сом." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mafiadjeck-cmd.github.io/portfolio-kyrgyzstan/cinematic/" />
+    <meta property="og:image" content="https://mafiadjeck-cmd.github.io/portfolio-kyrgyzstan/cinematic/og.png" />
+    <title>Mafiacjeck — Cinematic Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --ink: #0a0908;
+        --paper: #f0ece4;
+        --muted: rgba(240, 236, 228, .55);
+        --line: rgba(240, 236, 228, .22);
+        --amber: #d9903d;
+        color-scheme: dark;
+      }
+      * { box-sizing: border-box; }
+      html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--ink); }
+      body { color: var(--paper); font-family: "Inter", sans-serif; -webkit-font-smoothing: antialiased; }
+      a { color: inherit; text-decoration: none; }
+      button { color: inherit; font: inherit; cursor: pointer; }
+      .site {
+        position: relative;
+        width: 100%;
+        height: 100dvh;
+        isolation: isolate;
+        overflow: hidden;
+        background: var(--ink);
+      }
+      .film {
+        position: absolute;
+        inset: -5%;
+        z-index: -4;
+        width: 110%;
+        height: 110%;
+        object-fit: cover;
+        filter: saturate(.6) contrast(1.08);
+        animation: drift 18s ease-in-out infinite alternate;
+      }
+      .shade {
+        position: absolute;
+        inset: 0;
+        z-index: -3;
+        background:
+          linear-gradient(90deg, rgba(5,4,3,.78) 0%, rgba(5,4,3,.28) 50%, rgba(5,4,3,.58) 100%),
+          linear-gradient(180deg, rgba(5,4,3,.38), transparent 38%, rgba(5,4,3,.56));
+      }
+      .grain {
+        position: absolute;
+        inset: -50%;
+        z-index: 20;
+        opacity: .055;
+        pointer-events: none;
+        background-image:
+          repeating-radial-gradient(circle at 18% 27%, #fff 0 1px, transparent 1px 4px),
+          repeating-radial-gradient(circle at 71% 63%, #fff 0 1px, transparent 1px 5px);
+        animation: grain .22s steps(2) infinite;
+      }
+      .frame {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        padding: 1.5rem 2rem 1.25rem;
+      }
+      .topbar {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--line);
+        font-size: .68rem;
+        letter-spacing: .17em;
+        text-transform: uppercase;
+      }
+      .brand { font-weight: 800; }
+      .brand sup { color: var(--amber); font-size: .45rem; }
+      .location { color: var(--muted); text-align: center; }
+      .nav { display: flex; justify-content: flex-end; gap: 1.35rem; }
+      .nav button {
+        padding: 0;
+        border: 0;
+        background: transparent;
+        letter-spacing: inherit;
+        text-transform: inherit;
+        transition: color .2s ease;
+      }
+      .nav button:hover { color: var(--amber); }
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.55fr) minmax(220px, .45fr);
+        align-items: end;
+        gap: 2rem;
+        flex: 1;
+        padding: 2.5rem 0 2rem;
+      }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: .7rem;
+        margin: 0 0 1rem;
+        color: var(--muted);
+        font-size: .65rem;
+        letter-spacing: .19em;
+        text-transform: uppercase;
+      }
+      .eyebrow::before { width: 2.5rem; height: 1px; background: var(--amber); content: ""; }
+      .headline {
+        max-width: 1050px;
+        margin: 0;
+        font-family: "Oswald", sans-serif;
+        font-size: clamp(4.2rem, 9.1vw, 9.3rem);
+        font-weight: 500;
+        line-height: .78;
+        letter-spacing: -.045em;
+        text-transform: uppercase;
+      }
+      .headline .line {
+        display: block;
+        overflow: hidden;
+      }
+      .headline .word {
+        display: block;
+        transform: translateY(115%);
+        animation: reveal 1s cubic-bezier(.16,1,.3,1) forwards;
+      }
+      .headline .line:nth-child(2) .word { animation-delay: .08s; }
+      .headline .line:nth-child(3) .word { animation-delay: .16s; }
+      .headline em { color: transparent; font-style: normal; -webkit-text-stroke: 1px var(--paper); }
+      .side {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        gap: 1.3rem;
+        padding-bottom: .15rem;
+      }
+      .side-index { color: var(--amber); font-family: "Oswald", sans-serif; font-size: 2rem; }
+      .side-copy {
+        max-width: 260px;
+        margin: 0;
+        color: rgba(240,236,228,.78);
+        font-size: .82rem;
+        line-height: 1.55;
+      }
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.25rem;
+        padding: .85rem 1rem .85rem 1.2rem;
+        border: 1px solid var(--line);
+        background: rgba(10,9,8,.18);
+        backdrop-filter: blur(10px);
+        font-size: .67rem;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        transition: border-color .25s ease, background .25s ease;
+      }
+      .cta:hover { border-color: var(--amber); background: rgba(217,144,61,.12); }
+      .cta i { color: var(--amber); font-size: 1rem; font-style: normal; }
+      .lower {
+        display: grid;
+        grid-template-columns: 1.2fr .8fr;
+        gap: 1rem;
+        align-items: center;
+        padding-top: 1rem;
+        border-top: 1px solid var(--line);
+      }
+      .services { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; color: var(--muted); font-size: .63rem; letter-spacing: .12em; text-transform: uppercase; }
+      .services span::before { margin-right: .55rem; color: var(--amber); content: "◆"; font-size: .42rem; vertical-align: .12rem; }
+      .status { display: flex; align-items: center; justify-content: flex-end; gap: .8rem; color: var(--muted); font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; }
+      .pulse { width: .4rem; height: .4rem; border-radius: 50%; background: #7cdb86; box-shadow: 0 0 0 0 rgba(124,219,134,.6); animation: pulse 2s infinite; }
+      .overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        display: grid;
+        place-items: center;
+        padding: 2rem;
+        background: rgba(8,7,6,.9);
+        backdrop-filter: blur(18px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .45s ease, visibility .45s ease;
+      }
+      .overlay.open { opacity: 1; visibility: visible; }
+      .panel {
+        width: min(100%, 920px);
+        max-height: 88dvh;
+        overflow: auto;
+        border: 1px solid var(--line);
+        background: #0d0c0a;
+        transform: translateY(25px);
+        transition: transform .55s cubic-bezier(.16,1,.3,1);
+      }
+      .overlay.open .panel { transform: translateY(0); }
+      .panel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; padding: 1.5rem; border-bottom: 1px solid var(--line); }
+      .panel-kicker { margin: 0 0 .5rem; color: var(--amber); font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; }
+      .panel-title { margin: 0; font-family: "Oswald", sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 500; line-height: .9; text-transform: uppercase; }
+      .close { width: 2.5rem; height: 2.5rem; border: 1px solid var(--line); background: transparent; font-size: 1.35rem; transition: border-color .2s ease, color .2s ease; }
+      .close:hover { color: var(--amber); border-color: var(--amber); }
+      .projects { display: grid; }
+      .project {
+        display: grid;
+        grid-template-columns: 3.5rem 1fr auto;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.4rem 1.5rem;
+        border-bottom: 1px solid var(--line);
+        transition: background .25s ease;
+      }
+      .project:hover { background: rgba(217,144,61,.08); }
+      .project:last-child { border-bottom: 0; }
+      .project-no { color: var(--amber); font-family: "Oswald", sans-serif; font-size: 1.35rem; }
+      .project h3 { margin: 0 0 .25rem; font-size: .95rem; letter-spacing: .06em; text-transform: uppercase; }
+      .project p { margin: 0; color: var(--muted); font-size: .68rem; }
+      .project-arrow { font-size: 1.3rem; }
+      .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+      .contact-link { padding: 2rem 1.5rem; border-right: 1px solid var(--line); transition: background .25s ease; }
+      .contact-link:last-child { border-right: 0; }
+      .contact-link:hover { background: rgba(217,144,61,.08); }
+      .contact-link small { display: block; margin-bottom: .55rem; color: var(--muted); font-size: .55rem; letter-spacing: .15em; text-transform: uppercase; }
+      .contact-link strong { font-family: "Oswald", sans-serif; font-size: 1.4rem; font-weight: 500; text-transform: uppercase; }
+      .intro {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: grid;
+        grid-template-rows: 1fr auto;
+        padding: 2rem;
+        background: var(--ink);
+        transition: transform .9s cubic-bezier(.85,0,.15,1);
+      }
+      .loaded .intro { transform: translateY(-105%); }
+      .intro-brand { align-self: center; font-family: "Oswald", sans-serif; font-size: clamp(3.5rem, 10vw, 9rem); line-height: .8; text-transform: uppercase; }
+      .intro-bottom { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; }
+      .counter { color: var(--paper); font-family: "Oswald", sans-serif; font-size: 2rem; }
+      .cursor {
+        position: fixed;
+        z-index: 120;
+        width: 12px;
+        height: 12px;
+        margin: -6px 0 0 -6px;
+        border: 1px solid var(--paper);
+        border-radius: 50%;
+        pointer-events: none;
+        mix-blend-mode: difference;
+        transition: width .15s ease, height .15s ease, margin .15s ease, background .15s ease;
+      }
+      .cursor.hot { width: 34px; height: 34px; margin: -17px 0 0 -17px; background: var(--paper); }
+      @keyframes drift { to { transform: scale(1.035) translate3d(-.5%, -.4%, 0); } }
+      @keyframes reveal { to { transform: translateY(0); } }
+      @keyframes grain { 0% { transform: translate(0); } 25% { transform: translate(2%, -3%); } 50% { transform: translate(-3%, 2%); } 75% { transform: translate(3%, 4%); } 100% { transform: translate(-2%, -2%); } }
+      @keyframes pulse { 70% { box-shadow: 0 0 0 8px rgba(124,219,134,0); } 100% { box-shadow: 0 0 0 0 rgba(124,219,134,0); } }
+      @media (max-width: 850px) {
+        .frame { padding: 1.1rem 1.15rem 1rem; }
+        .topbar { grid-template-columns: 1fr auto; }
+        .location { display: none; }
+        .nav { gap: 1rem; }
+        .nav button:first-child { display: none; }
+        .hero { grid-template-columns: 1fr; align-content: end; gap: 1.3rem; padding: 1.8rem 0 1.25rem; }
+        .headline { font-size: clamp(3.8rem, 18vw, 7rem); }
+        .side { display: grid; grid-template-columns: auto 1fr; gap: .65rem 1rem; }
+        .side-index { grid-row: 1 / 3; }
+        .side-copy { font-size: .72rem; }
+        .cta { grid-column: 1 / -1; justify-content: space-between; width: 100%; }
+        .lower { grid-template-columns: 1fr; }
+        .status { justify-content: flex-start; }
+        .services { gap: .5rem 1rem; }
+        .overlay { padding: .75rem; }
+        .contact-grid { grid-template-columns: 1fr; }
+        .contact-link { padding: 1.25rem; border-right: 0; border-bottom: 1px solid var(--line); }
+        .contact-link:last-child { border-bottom: 0; }
+        .cursor { display: none; }
+      }
+      @media (max-height: 700px) {
+        .hero { padding: 1rem 0; }
+        .headline { font-size: clamp(3rem, 15vh, 7rem); }
+        .side-copy { display: none; }
+        .services { font-size: .55rem; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+        .intro { display: none; }
+        .headline .word { transform: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="intro" aria-hidden="true">
+      <div class="intro-brand">MAFIA<br/>DJECK</div>
+      <div class="intro-bottom"><span>Загружаю портфолио</span><span class="counter" id="counter">00</span></div>
+    </div>
+    <main class="site">
+      <video class="film" autoplay muted loop playsinline src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260725_114042_d2ed2a89-f2fa-449b-9609-da456344257b.mp4"></video>
+      <div class="shade"></div>
+      <div class="grain"></div>
+      <div class="frame">
+        <header class="topbar">
+          <a class="brand" href="./">MAFIADJECK<sup>®</sup></a>
+          <div class="location">Бишкек, Кыргызстан · Работаю по СНГ</div>
+          <nav class="nav" aria-label="Навигация">
+            <button type="button" data-projects>Работы</button>
+            <button type="button" data-contact>Контакт</button>
+          </nav>
+        </header>
+        <section class="hero">
+          <div>
+            <p class="eyebrow">Digital designer &amp; developer</p>
+            <h1 class="headline">
+              <span class="line"><span class="word">Создаю</span></span>
+              <span class="line"><span class="word"><em>бренды,</em> которые</span></span>
+              <span class="line"><span class="word">помнят</span></span>
+            </h1>
+          </div>
+          <aside class="side">
+            <span class="side-index">01</span>
+            <p class="side-copy">Сайты, интерфейсы и цифровые истории для бизнеса из Кыргызстана и стран СНГ.</p>
+            <button class="cta" type="button" data-projects><span>Смотреть проекты</span><i>↗</i></button>
+          </aside>
+        </section>
+        <footer class="lower">
+          <div class="services"><span>Web design</span><span>Development</span><span>Brand identity</span><span>от 5 000 сом</span></div>
+          <div class="status"><span class="pulse"></span><span>Открыт к новым проектам</span></div>
+        </footer>
+      </div>
+    </main>
+    <section class="overlay" id="projects" aria-label="Опубликованные проекты">
+      <div class="panel">
+        <header class="panel-head">
+          <div><p class="panel-kicker">Selected work · 2026</p><h2 class="panel-title">Реальные<br/>проекты</h2></div>
+          <button class="close" type="button" data-close aria-label="Закрыть">×</button>
+        </header>
+        <div class="projects">
+          <a class="project" href="https://mafiadjeck-cmd.github.io/" target="_blank" rel="noreferrer">
+            <span class="project-no">01</span><span><h3>A&amp;A Apparel Factory</h3><p>Корпоративный сайт · Бишкек</p></span><span class="project-arrow">↗</span>
+          </a>
+          <a class="project" href="https://mafiadjeck-cmd.github.io/genderparty-kg/" target="_blank" rel="noreferrer">
+            <span class="project-no">02</span><span><h3>Gender Party KG</h3><p>Сайт мероприятий · Кыргызстан</p></span><span class="project-arrow">↗</span>
+          </a>
+          <a class="project" href="https://astropulse-production.vercel.app/" target="_blank" rel="noreferrer">
+            <span class="project-no">03</span><span><h3>AstroPulse</h3><p>Веб-приложение · Натальная карта</p></span><span class="project-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="overlay" id="contact" aria-label="Контакты">
+      <div class="panel">
+        <header class="panel-head">
+          <div><p class="panel-kicker">Начнём проект</p><h2 class="panel-title">Связаться<br/>со мной</h2></div>
+          <button class="close" type="button" data-close aria-label="Закрыть">×</button>
+        </header>
+        <div class="contact-grid">
+          <a class="contact-link" href="https://wa.me/?text=Здравствуйте!%20Хочу%20обсудить%20сайт." target="_blank" rel="noreferrer"><small>Написать в</small><strong>WhatsApp ↗</strong></a>
+          <a class="contact-link" href="https://t.me/mafiadjeck" target="_blank" rel="noreferrer"><small>Написать в</small><strong>Telegram ↗</strong></a>
+          <a class="contact-link" href="https://instagram.com/mafiadjeck" target="_blank" rel="noreferrer"><small>Посмотреть</small><strong>Instagram ↗</strong></a>
+        </div>
+      </div>
+    </section>
+    <div class="cursor" id="cursor" aria-hidden="true"></div>
+    <script>
+      const counter = document.querySelector("#counter");
+      let value = 0;
+      const loading = setInterval(() => {
+        value = Math.min(100, value + Math.ceil(Math.random() * 15));
+        counter.textContent = String(value).padStart(2, "0");
+        if (value === 100) {
+          clearInterval(loading);
+          setTimeout(() => document.body.classList.add("loaded"), 180);
+        }
+      }, 75);
+      const projects = document.querySelector("#projects");
+      const contact = document.querySelector("#contact");
+      const closeAll = () => document.querySelectorAll(".overlay.open").forEach((item) => item.classList.remove("open"));
+      document.querySelectorAll("[data-projects]").forEach((button) => button.addEventListener("click", () => projects.classList.add("open")));
+      document.querySelectorAll("[data-contact]").forEach((button) => button.addEventListener("click", () => contact.classList.add("open")));
+      document.querySelectorAll("[data-close]").forEach((button) => button.addEventListener("click", closeAll));
+      document.querySelectorAll(".overlay").forEach((overlay) => overlay.addEventListener("click", (event) => {
+        if (event.target === overlay) closeAll();
+      }));
+      document.addEventListener("keydown", (event) => { if (event.key === "Escape") closeAll(); });
+      const cursor = document.querySelector("#cursor");
+      document.addEventListener("pointermove", (event) => {
+        cursor.style.transform = "translate3d(" + event.clientX + "px," + event.clientY + "px,0)";
+      });
+      document.querySelectorAll("a, button").forEach((item) => {
+        item.addEventListener("pointerenter", () => cursor.classList.add("hot"));
+        item.addEventListener("pointerleave", () => cursor.classList.remove("hot"));
+      });
+    </script>
+  </body>
+</html>
