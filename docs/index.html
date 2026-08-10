@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Портфолио цифрового дизайнера и разработчика. Сайты и приложения для Кыргызстана и СНГ от 5 000 сом."
+    />
+    <title>Mafiacjeck — дизайн и разработка сайтов в Кыргызстане</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://db.onlinewebfonts.com/c/d08bafd725a4cfc309efb5a88e0b63a5?family=basis33"
+      rel="stylesheet"
+    />
+    <style>
+      :root { color-scheme: dark; --white: #fff; --black: #000; --chip: #0b0b0b; }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; margin: 0; overflow: hidden; background: #000; }
+      body { color: #fff; font-family: "Inter", sans-serif; -webkit-font-smoothing: antialiased; }
+      a { color: inherit; text-decoration: none; }
+      button { color: inherit; font: inherit; cursor: pointer; }
+      .font-pixel { font-family: "basis33", monospace; }
+      .page { position: relative; width: 100%; height: 100dvh; overflow: hidden; background: #000; }
+      .background { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .shell { position: relative; z-index: 10; display: flex; flex-direction: column; height: 100%; padding: 0 3.5rem; }
+      .header { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 0; }
+      .mark { display: block; width: 28px; height: 28px; }
+      .desktop-nav { display: flex; gap: 2rem; font-size: .875rem; letter-spacing: .04em; }
+      .desktop-nav a, .icon-btn { transition: opacity .2s ease; }
+      .desktop-nav a:hover, .icon-btn:hover { opacity: .7; }
+      .menu-button { display: none; border: 0; background: transparent; padding: .5rem; font-size: 1.6rem; line-height: 1; }
+      .meta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; margin-top: 1rem; }
+      .meta h2 { margin: 0; font-size: 1.25rem; font-weight: 400; line-height: 1.1; letter-spacing: .04em; }
+      .meta h2 .font-pixel { font-size: 1.85rem; }
+      .asterisk { margin-top: .75rem; color: rgba(255,255,255,.5); font-size: .625rem; }
+      .blurb { margin: .25rem 0 0; color: rgba(255,255,255,.6); font-size: .75rem; line-height: 1.55; }
+      .label { margin: 0 0 .75rem; color: rgba(255,255,255,.5); font-size: 1rem; text-transform: uppercase; letter-spacing: .1em; }
+      .meta-copy, .services { max-width: 220px; margin: 0; color: rgba(255,255,255,.9); font-size: .875rem; line-height: 1.55; }
+      .services { padding: 0; list-style: none; }
+      .spacer { flex: 1; min-height: .5rem; }
+      .bottom { padding-bottom: 1rem; }
+      .bottom-row { display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 1.5rem; }
+      .hero { margin: 0; font-size: clamp(3rem, 4vw, 4.25rem); font-weight: 400; line-height: .72; letter-spacing: .04em; text-transform: uppercase; }
+      .hero .font-pixel { display: inline-block; font-size: 1.25em; line-height: 1; }
+      .actions { display: flex; flex-direction: column; justify-content: flex-end; gap: 1.5rem; }
+      .works-button { display: flex; align-items: center; align-self: flex-start; gap: .75rem; padding: .75rem 1.5rem; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.05); backdrop-filter: blur(6px); font-size: .875rem; letter-spacing: .08em; transition: background .2s ease; }
+      .works-button:hover { background: rgba(255,255,255,.1); }
+      .chips { display: flex; flex-wrap: wrap; align-self: flex-end; gap: .75rem; }
+      .chip { display: flex; align-items: center; gap: .5rem; padding: .5rem 1rem; background: var(--chip); font-weight: 700; transition: background .2s ease; }
+      .chip:hover { background: #171717; }
+      .chip small { color: rgba(255,255,255,.5); font-size: .75rem; font-weight: 400; }
+      .footer { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.25rem; padding-top: 1rem; color: rgba(255,255,255,.6); font-size: .75rem; }
+      .footer p { margin: 0; }
+      .footer p:last-child { text-align: right; }
+      .footer .contact { color: #ef4444; }
+      .overlay { position: fixed; inset: 0; z-index: 50; display: flex; flex-direction: column; background: rgba(0,0,0,.95); backdrop-filter: blur(12px); opacity: 0; pointer-events: none; transition: opacity .5s cubic-bezier(.16,1,.3,1); }
+      .overlay.open { opacity: 1; pointer-events: auto; }
+      .overlay-header { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem; }
+      .close-button { border: 0; background: transparent; padding: .5rem; font-size: 2rem; line-height: 1; }
+      .mobile-nav { display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+      .mobile-nav a { transform: translateY(1rem); opacity: 0; font-size: 1.5rem; letter-spacing: .1em; transition: all .5s cubic-bezier(.16,1,.3,1); }
+      .overlay.open .mobile-nav a { transform: translateY(0); opacity: 1; }
+      .projects-overlay { z-index: 45; align-items: center; justify-content: center; padding: 1.25rem; background: rgba(0,0,0,.75); }
+      .projects-panel { width: min(100%, 760px); padding: 2rem; background: #0b0b0b; transform: translateY(2rem); transition: transform .5s cubic-bezier(.16,1,.3,1); }
+      .projects-overlay.open .projects-panel { transform: translateY(0); }
+      .projects-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; }
+      .projects-kicker { margin: 0 0 .5rem; color: rgba(255,255,255,.5); font-size: .875rem; letter-spacing: .1em; text-transform: uppercase; }
+      .projects-title { margin: 0; font-size: 1.875rem; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; }
+      .projects-list { border-top: 1px solid rgba(255,255,255,.15); border-bottom: 1px solid rgba(255,255,255,.15); }
+      .project { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 0; transition: opacity .2s ease; }
+      .project + .project { border-top: 1px solid rgba(255,255,255,.15); }
+      .project:hover { opacity: .7; }
+      .project-number { margin-right: 1rem; color: rgba(255,255,255,.4); font-size: .75rem; }
+      .project-name { font-weight: 600; letter-spacing: .04em; }
+      .project-type { margin-left: 1rem; color: rgba(255,255,255,.5); font-size: .75rem; }
+      @media (min-width: 1024px) { .background { transform: scale(1.2); } }
+      @media (max-width: 1023px) {
+        .shell { padding: 0 2.5rem; }
+        .meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .bottom-row { grid-template-columns: 1fr; }
+        .actions { gap: 1rem; }
+        .chips { align-self: flex-start; }
+      }
+      @media (max-width: 767px) {
+        .shell { padding: 0 1.25rem; }
+        .header { padding: 1.25rem 0; }
+        .desktop-nav { display: none; }
+        .menu-button { display: block; }
+        .meta { gap: 1rem; margin-top: .5rem; }
+        .meta > :nth-child(even) { text-align: right; }
+        .meta h2 { font-size: 1rem; }
+        .meta h2 .font-pixel { font-size: 1.35rem; }
+        .blurb, .meta-copy, .services { font-size: .72rem; line-height: 1.3; }
+        .label { margin-bottom: .35rem; font-size: .8rem; }
+        .hero { font-size: clamp(1.75rem, 8vw, 3rem); }
+        .works-button { padding: .65rem 1rem; font-size: .75rem; }
+        .chips { gap: .4rem; }
+        .chip { padding: .45rem .65rem; font-size: .75rem; }
+        .footer { grid-template-columns: 1fr; gap: .35rem; margin-top: .7rem; padding-top: .7rem; font-size: .65rem; }
+        .footer p:last-child { text-align: left; }
+        .projects-overlay { align-items: flex-end; }
+        .projects-panel { padding: 1.5rem; }
+        .projects-title { font-size: 1.5rem; }
+        .project-type { display: block; margin: .3rem 0 0 2rem; }
+      }
+      @media (max-height: 760px) {
+        .meta { margin-top: 0; }
+        .blurb, .meta-copy, .services { font-size: .68rem; line-height: 1.2; }
+        .hero { font-size: clamp(1.6rem, 5.8vh, 3.75rem); }
+        .bottom { padding-bottom: .5rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page" id="top">
+      <video
+        class="background"
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260725_114042_d2ed2a89-f2fa-449b-9609-da456344257b.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+      ></video>
+      <div class="shell">
+        <header class="header">
+          <a href="#top" aria-label="На главную">
+            <svg class="mark" viewBox="0 0 256 256" role="img" aria-label="Логотип Mafiacjeck">
+              <path d="M160 88 194 34 216 0h40v40l-34.5 53.5L200 128h56v128H96v-88l-31.754 52L40 256H0v-40l34-54 22-34H0V0h160Z" fill="#fff"/>
+            </svg>
+          </a>
+          <nav class="desktop-nav" aria-label="Основная навигация">
+            <a href="#about">ОБО МНЕ</a>
+            <a href="#services">ПОДХОД</a>
+            <button class="works-button" data-open-projects type="button">ПРОЕКТЫ</button>
+            <a href="#price">ЦЕНЫ</a>
+            <a href="https://instagram.com/mafiadjeck" target="_blank" rel="noreferrer">INSTAGRAM</a>
+            <a href="https://t.me/mafiadjeck" target="_blank" rel="noreferrer">СВЯЗЬ</a>
+          </nav>
+          <button class="menu-button icon-btn" id="open-menu" aria-label="Открыть меню" type="button">☰</button>
+        </header>
+        <section class="meta" id="about">
+          <div>
+            <h2>MAFIA<br/><span class="font-pixel">DJECK</span></h2>
+            <div class="asterisk">*</div>
+            <p class="blurb font-pixel">Цифровой дизайнер<br/>и разработчик из Кыргызстана.<br/>Работаю с бизнесом<br/>по всему СНГ</p>
+          </div>
+          <div><h2>ДИЗАЙН &amp;<br/><span class="font-pixel">РАЗРАБОТКА</span></h2></div>
+          <div>
+            <h3 class="label font-pixel">Что делаю</h3>
+            <p class="meta-copy">Создаю сильные сайты и цифровые продукты, которые выделяют бренд и приводят клиентов</p>
+          </div>
+          <div id="services">
+            <h3 class="label font-pixel">Услуги</h3>
+            <ul class="services"><li>Лендинги и сайты</li><li>UI/UX-дизайн</li><li>Фирменный стиль</li><li>React / Next.js</li><li>Анимация и видео</li><li id="price">от 5 000 сом</li></ul>
+          </div>
+        </section>
+        <div class="spacer"></div>
+        <section class="bottom">
+          <div class="bottom-row">
+            <h1 class="hero">СОЗДАЮ ДЛЯ ВАС<br/><span class="font-pixel">НЕОЖИДАННЫЕ</span><br/>ЦИФРОВЫЕ<br/><span class="font-pixel">ВПЕЧАТЛЕНИЯ</span></h1>
+            <div class="actions">
+              <button class="works-button" data-open-projects type="button"><span>▶</span><span>СМОТРЕТЬ РАБОТЫ</span></button>
+              <div class="chips">
+                <a class="chip" href="https://wa.me/?text=Здравствуйте!%20Хочу%20обсудить%20сайт." target="_blank" rel="noreferrer">WHATSAPP <small>↗</small></a>
+                <a class="chip" href="https://t.me/mafiadjeck" target="_blank" rel="noreferrer">TG. <small>↗</small></a>
+                <a class="chip" href="https://instagram.com/mafiadjeck" target="_blank" rel="noreferrer">INSTAGRAM <small>↗</small></a>
+              </div>
+            </div>
+          </div>
+          <footer class="footer">
+            <p>Открыт к проектам по Кыргызстану и СНГ. <a class="contact" href="https://t.me/mafiadjeck" target="_blank" rel="noreferrer">Обсудить задачу</a></p>
+            <p>Сайты от 5 000 сом &bull; Дизайн &bull; Разработка</p>
+          </footer>
+        </section>
+      </div>
+      <div class="overlay" id="mobile-menu">
+        <div class="overlay-header">
+          <svg class="mark" viewBox="0 0 256 256" aria-hidden="true"><path d="M160 88 194 34 216 0h40v40l-34.5 53.5L200 128h56v128H96v-88l-31.754 52L40 256H0v-40l34-54 22-34H0V0h160Z" fill="#fff"/></svg>
+          <button class="close-button icon-btn" id="close-menu" aria-label="Закрыть меню" type="button">×</button>
+        </div>
+        <nav class="mobile-nav" aria-label="Мобильная навигация">
+          <a href="#about">ОБО МНЕ</a><a href="#services">ПОДХОД</a><button class="works-button" data-open-projects type="button">ПРОЕКТЫ</button><a href="#price">ЦЕНЫ</a><a href="https://instagram.com/mafiadjeck" target="_blank" rel="noreferrer">INSTAGRAM</a><a href="https://t.me/mafiadjeck" target="_blank" rel="noreferrer">СВЯЗЬ</a>
+        </nav>
+      </div>
+      <div class="overlay projects-overlay" id="projects" role="dialog" aria-label="Мои опубликованные проекты">
+        <div class="projects-panel">
+          <div class="projects-head">
+            <div><p class="projects-kicker font-pixel">Реальные проекты</p><h2 class="projects-title">Сайты и приложения</h2></div>
+            <button class="close-button icon-btn" id="close-projects" aria-label="Закрыть проекты" type="button">×</button>
+          </div>
+          <div class="projects-list">
+            <a class="project" href="https://mafiadjeck-cmd.github.io/" target="_blank" rel="noreferrer"><span><span class="project-number">01</span><span class="project-name">A&amp;A APPAREL FACTORY</span><span class="project-type">Сайт швейной фабрики</span></span><span>↗</span></a>
+            <a class="project" href="https://mafiadjeck-cmd.github.io/genderparty-kg/" target="_blank" rel="noreferrer"><span><span class="project-number">02</span><span class="project-name">GENDER PARTY KG</span><span class="project-type">Сайт мероприятий в Бишкеке</span></span><span>↗</span></a>
+            <a class="project" href="https://astropulse-production.vercel.app/" target="_blank" rel="noreferrer"><span><span class="project-number">03</span><span class="project-name">ASTROPULSE</span><span class="project-type">Веб-приложение — натальная карта</span></span><span>↗</span></a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      const menu = document.querySelector("#mobile-menu");
+      const projects = document.querySelector("#projects");
+      document.querySelector("#open-menu").addEventListener("click", () => menu.classList.add("open"));
+      document.querySelector("#close-menu").addEventListener("click", () => menu.classList.remove("open"));
+      document.querySelector("#close-projects").addEventListener("click", () => projects.classList.remove("open"));
+      document.querySelectorAll("[data-open-projects]").forEach((button) => {
+        button.addEventListener("click", () => {
+          menu.classList.remove("open");
+          projects.classList.add("open");
+        });
+      });
+      menu.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => menu.classList.remove("open")));
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          menu.classList.remove("open");
+          projects.classList.remove("open");
+        }
+      });
+    </script>
+  </body>
+</html>
