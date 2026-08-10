@@ -67,7 +67,7 @@
       .mobile-nav a { transform: translateY(1rem); opacity: 0; font-size: 1.5rem; letter-spacing: .1em; transition: all .5s cubic-bezier(.16,1,.3,1); }
       .overlay.open .mobile-nav a { transform: translateY(0); opacity: 1; }
       .projects-overlay { z-index: 45; align-items: center; justify-content: center; padding: 1.25rem; background: rgba(0,0,0,.75); }
-      .projects-panel { width: min(100%, 760px); padding: 2rem; background: #0b0b0b; transform: translateY(2rem); transition: transform .5s cubic-bezier(.16,1,.3,1); }
+      .projects-panel { width: min(100%, 760px); max-height: 88dvh; overflow-y: auto; padding: 2rem; background: #0b0b0b; transform: translateY(2rem); transition: transform .5s cubic-bezier(.16,1,.3,1); }
       .projects-overlay.open .projects-panel { transform: translateY(0); }
       .projects-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; }
       .projects-kicker { margin: 0 0 .5rem; color: rgba(255,255,255,.5); font-size: .875rem; letter-spacing: .1em; text-transform: uppercase; }
@@ -135,7 +135,7 @@
             </svg>
           </a>
           <nav class="desktop-nav" aria-label="Основная навигация">
-            <a href="#about">ОБО МНЕ</a>
+          <a href="./showcase/">ВЫБРАТЬ СТИЛЬ</a>
             <a href="#services">ПОДХОД</a>
             <button class="works-button" data-open-projects type="button">ПРОЕКТЫ</button>
             <a href="#price">ЦЕНЫ</a>
@@ -195,9 +195,13 @@
             <button class="close-button icon-btn" id="close-projects" aria-label="Закрыть проекты" type="button">×</button>
           </div>
           <div class="projects-list">
-            <a class="project" href="https://mafiadjeck-cmd.github.io/" target="_blank" rel="noreferrer"><span><span class="project-number">01</span><span class="project-name">A&amp;A APPAREL FACTORY</span><span class="project-type">Сайт швейной фабрики</span></span><span>↗</span></a>
-            <a class="project" href="https://mafiadjeck-cmd.github.io/genderparty-kg/" target="_blank" rel="noreferrer"><span><span class="project-number">02</span><span class="project-name">GENDER PARTY KG</span><span class="project-type">Сайт мероприятий в Бишкеке</span></span><span>↗</span></a>
-            <a class="project" href="https://astropulse-production.vercel.app/" target="_blank" rel="noreferrer"><span><span class="project-number">03</span><span class="project-name">ASTROPULSE</span><span class="project-type">Веб-приложение — натальная карта</span></span><span>↗</span></a>
+            <a class="project" href="https://www.astropulse.life/" target="_blank" rel="noreferrer"><span><span class="project-number">01</span><span class="project-name">ASTROPULSE</span><span class="project-type">Веб-приложение — натальная карта</span></span><span>↗</span></a>
+            <a class="project" href="https://targetkg.pp.ua/ru/" target="_blank" rel="noreferrer"><span><span class="project-number">02</span><span class="project-name">TARGET.KG</span><span class="project-type">Сайт студии — сайты, боты и автоматизация</span></span><span>↗</span></a>
+            <a class="project" href="https://mafiadjeck-cmd.github.io/" target="_blank" rel="noreferrer"><span><span class="project-number">03</span><span class="project-name">A&amp;A APPAREL FACTORY</span><span class="project-type">Сайт швейной фабрики</span></span><span>↗</span></a>
+            <a class="project" href="https://mafiadjeck-cmd.github.io/genderparty-kg/" target="_blank" rel="noreferrer"><span><span class="project-number">04</span><span class="project-name">GENDER PARTY KG</span><span class="project-type">Сайт мероприятий в Бишкеке</span></span><span>↗</span></a>
+            <a class="project" href="https://t.me/EvgenyTargetBot" target="_blank" rel="noreferrer"><span><span class="project-number">05</span><span class="project-name">PREMIUM AI</span><span class="project-type">Telegram Mini App — AI-аудит Instagram</span></span><span>↗</span></a>
+            <a class="project" href="https://t.me/mafiadjeck?text=Хочу%20посмотреть%20демо%20Telegram%20Mini%20App" target="_blank" rel="noreferrer"><span><span class="project-number">06</span><span class="project-name">САМ СЕБЕ ТАРГЕТОЛОГ</span><span class="project-type">Telegram Mini App — демо по запросу</span></span><span>↗</span></a>
+            <a class="project" href="https://t.me/mafiadjeck?text=Хочу%20посмотреть%20кейс%20Tuzova%20Marketing" target="_blank" rel="noreferrer"><span><span class="project-number">07</span><span class="project-name">TUZOVA MARKETING</span><span class="project-type">WhatsApp Business Platform — кейс по запросу</span></span><span>↗</span></a>
           </div>
         </div>
       </div>

@@ -23,6 +23,16 @@ const navItems = [
 
 const projects = [
   {
+    title: "ASTROPULSE",
+    type: "Веб-приложение — натальная карта",
+    href: "https://www.astropulse.life/",
+  },
+  {
+    title: "TARGET.KG",
+    type: "Сайт студии — сайты, боты и автоматизация",
+    href: "https://targetkg.pp.ua/ru/",
+  },
+  {
     title: "A&A APPAREL FACTORY",
     type: "Сайт швейной фабрики",
     href: "https://mafiadjeck-cmd.github.io/",
@@ -33,9 +43,19 @@ const projects = [
     href: "https://mafiadjeck-cmd.github.io/genderparty-kg/",
   },
   {
-    title: "ASTROPULSE",
-    type: "Веб-приложение — натальная карта",
-    href: "https://astropulse-production.vercel.app/",
+    title: "PREMIUM AI",
+    type: "Telegram Mini App — AI-аудит Instagram",
+    href: "https://t.me/EvgenyTargetBot",
+  },
+  {
+    title: "САМ СЕБЕ ТАРГЕТОЛОГ",
+    type: "Telegram Mini App — платформа онлайн-курса",
+    href: "https://t.me/mafiadjeck?text=Хочу%20посмотреть%20демо%20Telegram%20Mini%20App",
+  },
+  {
+    title: "TUZOVA MARKETING",
+    type: "WhatsApp Business Platform — автоматизация",
+    href: "https://t.me/mafiadjeck?text=Хочу%20посмотреть%20кейс%20Tuzova%20Marketing",
   },
 ];
 
@@ -260,7 +280,7 @@ export default function Home() {
         aria-label="Мои опубликованные проекты"
       >
         <div
-          className={`w-full max-w-3xl bg-[#0B0B0B] p-6 transition-all duration-500 sm:p-8 ${
+          className={`max-h-[88dvh] w-full max-w-3xl overflow-y-auto bg-[#0B0B0B] p-6 transition-all duration-500 sm:p-8 ${
             projectsOpen ? "translate-y-0" : "translate-y-8"
           }`}
         >
