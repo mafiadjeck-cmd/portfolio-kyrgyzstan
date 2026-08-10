@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="description" content="Mafiacjeck AI — сайты, Telegram Mini Apps и автоматизация для Кыргызстана и СНГ." />
+    <meta property="og:title" content="Mafiacjeck AI — ясно, точно, автоматизировано" />
+    <meta property="og:description" content="Сайты, Telegram Mini Apps и AI-автоматизация для бизнеса." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mafiadjeck-cmd.github.io/portfolio-kyrgyzstan/nova-ai/" />
+    <meta property="og:image" content="https://mafiadjeck-cmd.github.io/portfolio-kyrgyzstan/nova-ai/og.png" />
+    <title>MAFIADJECK AI — Ясно. Точно. Автоматизировано.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root { --white: #fff; --black: #0a0a0a; color-scheme: dark; }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; background: var(--black); }
+      body { margin: 0; background: var(--black); color: var(--white); font-family: "Inter", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+      ::selection { background: rgba(255,255,255,.2); }
+      a { color: inherit; text-decoration: none; }
+      button { color: inherit; font: inherit; cursor: pointer; }
+      .scroll-video { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: #0a0a0a; }
+      .media-layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .5s ease; }
+      #poster { opacity: 1; }
+      #scrub-video { opacity: 0; }
+      #scrub-canvas { opacity: 0; }
+      .video-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,7,9,.15), rgba(5,7,9,.04) 45%, rgba(5,7,9,.25)); }
+      .page { position: relative; z-index: 10; }
+      .nav { position: fixed; inset: 0 0 auto; z-index: 50; border-bottom: 1px solid rgba(255,255,255,.15); background: rgba(10,10,10,.08); backdrop-filter: blur(5px); }
+      .pad { padding-inline: 1.25rem; }
+      .nav-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 68px; }
+      .logo { display: inline-flex; align-items: center; gap: .6rem; font-size: 1.2rem; font-weight: 500; letter-spacing: -.03em; }
+      .logo i { width: 24px; height: 24px; }
+      .nav-links { display: flex; align-items: center; gap: 2rem; }
+      .nav-links a { color: rgba(255,255,255,.85); font-size: .875rem; transition: color .3s ease; }
+      .nav-links a:hover { color: #fff; }
+      .nav-links sup { margin-left: .18rem; color: rgba(255,255,255,.6); font-size: .625rem; }
+      .nav-cta { justify-self: end; padding: .55rem 1rem; border: 1px solid rgba(255,255,255,.2); border-radius: .375rem; background: rgba(255,255,255,.15); backdrop-filter: blur(12px); font-size: .75rem; transition: background .3s ease; }
+      .nav-cta:hover { background: rgba(255,255,255,.25); }
+      .section { display: flex; min-height: 100vh; min-height: 100svh; flex-direction: column; justify-content: space-between; padding-top: 6rem; padding-bottom: 3rem; }
+      .top-row, .bottom-row { display: flex; flex-direction: column; gap: 2rem; }
+      .service-list { display: grid; gap: .5rem; }
+      .mono { font-family: "Inter", system-ui, sans-serif; }
+      .service-list span { font-size: .75rem; letter-spacing: .15em; text-transform: uppercase; filter: drop-shadow(0 2px 5px rgba(0,0,0,.5)); }
+      .intro { max-width: 20rem; margin: 0; font-size: 1.125rem; line-height: 1.55; filter: drop-shadow(0 2px 6px rgba(0,0,0,.6)); }
+      .badge { display: inline-flex; align-self: flex-start; margin-bottom: 1.25rem; padding: .4rem .75rem; border-left: 2px solid #fff; background: rgba(255,255,255,.15); backdrop-filter: blur(12px); font-size: .68rem; letter-spacing: .15em; text-transform: uppercase; }
+      .headline { max-width: 900px; margin: 0; font-size: clamp(3rem, 8vw, 4.5rem); font-weight: 400; line-height: 1.05; letter-spacing: -.045em; filter: drop-shadow(0 5px 12px rgba(0,0,0,.55)); }
+      .contact-card { display: flex; align-items: center; gap: 1rem; align-self: flex-start; padding: .75rem; border-radius: .75rem; background: rgba(255,255,255,.15); backdrop-filter: blur(12px); }
+      .portrait { width: 80px; height: 96px; border-radius: .5rem; object-fit: cover; }
+      .contact-info { display: grid; gap: .38rem; padding-right: .5rem; }
+      .contact-info strong { font-size: .875rem; font-weight: 500; }
+      .contact-info small { color: rgba(255,255,255,.6); font-size: .625rem; letter-spacing: .15em; text-transform: uppercase; }
+      .primary { display: inline-flex; align-items: center; gap: .35rem; margin-top: .15rem; padding: .5rem 1rem; border: 0; border-radius: 999px; background: #fff; color: #000; font-size: .75rem; font-weight: 500; transition: background .3s ease; }
+      .primary:hover { background: rgba(255,255,255,.85); }
+      .spacer { height: 80vh; }
+      .section-two-top { display: flex; flex-direction: column; gap: 2rem; }
+      .capability-copy { max-width: 24rem; margin: 0; font-size: 1.125rem; line-height: 1.55; filter: drop-shadow(0 2px 6px rgba(0,0,0,.6)); }
+      .capability-bottom { display: flex; flex: 1; flex-direction: column; justify-content: flex-end; gap: 3rem; }
+      .capability-left { max-width: 38rem; }
+      .body-copy { max-width: 30rem; margin: 1.5rem 0 0; color: rgba(255,255,255,.8); font-size: .9rem; line-height: 1.6; filter: drop-shadow(0 2px 5px rgba(0,0,0,.55)); }
+      .ctas { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+      .secondary { padding: .65rem 1.25rem; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; background: rgba(255,255,255,.1); backdrop-filter: blur(12px); font-size: .8rem; transition: background .3s ease; }
+      .secondary:hover { background: rgba(255,255,255,.2); }
+      .panel { width: 100%; max-width: 28rem; padding-inline: 1.25rem; border: 1px solid rgba(255,255,255,.15); border-radius: 1rem; background: rgba(255,255,255,.1); backdrop-filter: blur(12px); }
+      .cap-row { display: flex; gap: 1.25rem; padding-block: 1.25rem; border-bottom: 1px solid rgba(255,255,255,.15); }
+      .cap-row:last-child { border-bottom: 0; }
+      .cap-index { color: rgba(255,255,255,.55); font-size: .68rem; letter-spacing: .15em; }
+      .cap-main { flex: 1; }
+      .cap-title { display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: 1rem; font-weight: 500; }
+      .cap-title i { color: rgba(255,255,255,.4); transition: transform .3s ease, color .3s ease; }
+      .cap-row:hover .cap-title i { transform: translateX(2px); color: #fff; }
+      .cap-main p { margin: .38rem 0 0; color: rgba(255,255,255,.7); font-size: .82rem; line-height: 1.55; }
+      .reveal { transform: translateY(2rem); opacity: 0; transition: all .7s ease-out; will-change: transform; }
+      .reveal.visible { transform: translateY(0); opacity: 1; }
+      @media (min-width: 640px) {
+        .pad { padding-inline: 2rem; }
+        .top-row, .section-two-top { flex-direction: row; justify-content: space-between; }
+        .intro, .capability-copy { text-align: right; font-size: 1.25rem; }
+        .headline { font-size: clamp(3.75rem, 8vw, 4.5rem); }
+      }
+      @media (min-width: 768px) {
+        .pad { padding-inline: 3rem; }
+        .bottom-row { flex-direction: row; align-items: flex-end; justify-content: space-between; }
+        .capability-bottom { flex-direction: row; align-items: flex-end; justify-content: space-between; gap: 4rem; }
+        .headline { font-size: clamp(4rem, 7vw, 4.5rem); }
+      }
+      @media (max-width: 767px) {
+        .nav-row { grid-template-columns: 1fr auto; }
+        .nav-links { display: none; }
+        .section { padding-bottom: 2rem; }
+        .headline { font-size: clamp(2.8rem, 14vw, 4.5rem); }
+        .contact-card { width: 100%; }
+        .section-two-top { gap: 1.25rem; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+        .reveal { transform: none; opacity: 1; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scroll-video" aria-hidden="true">
+      <img class="media-layer" id="poster" src="./og.png" alt="" />
+      <video class="media-layer" id="scrub-video" muted playsinline preload="auto" crossorigin="anonymous" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260729_102822_0e6c87e8-c141-4744-bf32-ad30db296371.mp4"></video>
+      <canvas class="media-layer" id="scrub-canvas"></canvas>
+      <div class="video-shade"></div>
+    </div>
+    <div class="page">
+      <header class="nav">
+        <div class="nav-row pad">
+          <a class="logo reveal" href="./" data-delay="0"><i data-lucide="hexagon"></i><span>mafiadjeck ai</span></a>
+          <nav class="nav-links" aria-label="Навигация">
+            <a class="reveal" data-delay="100" href="../showcase/#works">Проекты<sup>7</sup></a>
+            <a class="reveal" data-delay="200" href="../showcase/">Стили</a>
+            <a class="reveal" data-delay="300" href="https://targetkg.pp.ua/ru/" target="_blank" rel="noreferrer">Обо мне</a>
+            <a class="reveal" data-delay="400" href="https://instagram.com/mafiadjeck" target="_blank" rel="noreferrer">Контакт</a>
+          </nav>
+          <a class="nav-cta reveal" data-delay="500" href="https://t.me/mafiadjeck?text=Хочу%20бесплатную%20консультацию" target="_blank" rel="noreferrer">Бесплатная консультация</a>
+        </div>
+      </header>
+      <main>
+        <section class="section pad">
+          <div class="top-row">
+            <div class="service-list mono">
+              <span class="reveal" data-delay="150">/ AI AUTOMATION</span>
+              <span class="reveal" data-delay="270">/ TELEGRAM MINI APPS</span>
+              <span class="reveal" data-delay="390">/ WEBSITES &amp; AI PRODUCTS</span>
+              <span class="reveal" data-delay="510">/ ОТ 5 000 СОМ</span>
+            </div>
+            <p class="intro reveal" data-delay="300">Создаю сайты и автоматизацию, которые делают работу бизнеса понятнее, точнее и быстрее.</p>
+          </div>
+          <div class="bottom-row">
+            <div>
+              <div class="badge mono reveal" data-delay="150">7 реальных проектов</div>
+              <h1 class="headline reveal" data-delay="280">Ясно. Точно.<br/>Автоматизировано.</h1>
+            </div>
+            <div class="contact-card reveal" data-delay="420">
+              <img class="portrait" src="https://avatars.githubusercontent.com/u/309190292?v=4" alt="Mafiacjeck, digital designer and developer" />
+              <div class="contact-info">
+                <strong>Поговорить с Mafiacjeck</strong>
+                <small class="mono">Digital designer &amp; developer</small>
+                <a class="primary" href="https://t.me/mafiadjeck" target="_blank" rel="noreferrer"><span>Написать в Telegram</span><i data-lucide="chevron-right" style="width:14px;height:14px"></i></a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="spacer" aria-hidden="true"></div>
+        <section class="section pad">
+          <div class="section-two-top">
+            <div class="badge mono reveal" data-delay="120">Идеи в действие</div>
+            <p class="capability-copy reveal" data-delay="220">AI не просто отвечает — он помогает увидеть задачу, убрать лишнее и быстро получить рабочий результат.</p>
+          </div>
+          <div class="capability-bottom">
+            <div class="capability-left">
+              <h2 class="headline reveal" data-delay="180">Проекты, которые<br/>работают.</h2>
+              <p class="body-copy reveal" data-delay="320">От первого эскиза до запуска: превращаю идею в сайт, Telegram Mini App или систему автоматизации, которой команда может пользоваться каждый день.</p>
+              <div class="ctas reveal" data-delay="420">
+                <a class="primary" href="../showcase/#works"><span>Смотреть работы</span><i data-lucide="chevron-right" style="width:14px;height:14px"></i></a>
+                <a class="secondary" href="https://t.me/mafiadjeck?text=Хочу%20обсудить%20проект" target="_blank" rel="noreferrer">Обсудить проект</a>
+                <a class="secondary" href="https://wa.me/?text=Здравствуйте!%20Хочу%20обсудить%20сайт%20или%20приложение." target="_blank" rel="noreferrer">WhatsApp</a>
+              </div>
+            </div>
+            <div class="panel">
+              <a class="cap-row reveal" data-delay="300" href="https://t.me/EvgenyTargetBot" target="_blank" rel="noreferrer">
+                <span class="cap-index mono">01</span><span class="cap-main"><span class="cap-title">Telegram Mini Apps <i data-lucide="chevron-right" style="width:16px;height:16px"></i></span><p>Боты, личные кабинеты, AI-аудиты, курсы, прогресс и платежные сценарии.</p></span>
+              </a>
+              <a class="cap-row reveal" data-delay="410" href="https://targetkg.pp.ua/ru/" target="_blank" rel="noreferrer">
+                <span class="cap-index mono">02</span><span class="cap-main"><span class="cap-title">AI и автоматизация <i data-lucide="chevron-right" style="width:16px;height:16px"></i></span><p>WhatsApp, заявки, AI-помощники и интеграции, которые экономят время.</p></span>
+              </a>
+              <a class="cap-row reveal" data-delay="520" href="https://www.astropulse.life/" target="_blank" rel="noreferrer">
+                <span class="cap-index mono">03</span><span class="cap-main"><span class="cap-title">Сайты и продукты <i data-lucide="chevron-right" style="width:16px;height:16px"></i></span><p>От быстрых лендингов до полноценных веб-приложений с реальной логикой.</p></span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script>
+      if (window.lucide) window.lucide.createIcons();
+      const reveals = document.querySelectorAll(".reveal");
+      reveals.forEach((item) => { item.style.transitionDelay = (item.dataset.delay || 0) + "ms"; });
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add("visible"); });
+      }, { threshold: .15 });
+      reveals.forEach((item) => observer.observe(item));
+
+      const source = "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260729_102822_0e6c87e8-c141-4744-bf32-ad30db296371.mp4";
+      const poster = document.querySelector("#poster");
+      const video = document.querySelector("#scrub-video");
+      const canvas = document.querySelector("#scrub-canvas");
+      const context = canvas.getContext("2d", { alpha: false });
+      const frames = [];
+      let target = 0;
+      let smoothed = 0;
+      let videoReady = false;
+      let cacheReady = false;
+      let extracting = false;
+      function clamp(value, min, max) { return Math.min(max, Math.max(min, value)); }
+      function resize() {
+        const dpr = Math.min(devicePixelRatio || 1, 2);
+        canvas.width = Math.round(innerWidth * dpr);
+        canvas.height = Math.round(innerHeight * dpr);
+      }
+      function coverDraw(image) {
+        const iw = image.videoWidth || image.width;
+        const ih = image.videoHeight || image.height;
+        if (!iw || !ih) return;
+        const scale = Math.max(canvas.width / iw, canvas.height / ih);
+        const dw = iw * scale;
+        const dh = ih * scale;
+        context.drawImage(image, (canvas.width - dw) / 2, (canvas.height - dh) / 2, dw, dh);
+      }
+      function updateTarget() {
+        const length = document.documentElement.scrollHeight - innerHeight;
+        target = length > 0 ? clamp(scrollY / length, 0, 1) : 0;
+      }
+      function seek(media, time) {
+        return new Promise((resolve, reject) => {
+          const done = () => { cleanup(); resolve(); };
+          const fail = () => { cleanup(); reject(new Error("seek failed")); };
+          const cleanup = () => { media.removeEventListener("seeked", done); media.removeEventListener("error", fail); };
+          media.addEventListener("seeked", done, { once: true });
+          media.addEventListener("error", fail, { once: true });
+          media.currentTime = time;
+        });
+      }
+      async function buildCache() {
+        if (extracting || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        extracting = true;
+        const extractor = document.createElement("video");
+        extractor.crossOrigin = "anonymous";
+        extractor.muted = true;
+        extractor.playsInline = true;
+        extractor.preload = "auto";
+        extractor.src = source;
+        try {
+          await new Promise((resolve, reject) => {
+            extractor.addEventListener("loadedmetadata", resolve, { once: true });
+            extractor.addEventListener("error", reject, { once: true });
+            extractor.load();
+          });
+          const count = Math.min(90, Math.max(24, Math.floor(extractor.duration * 12)));
+          const width = Math.min(960, extractor.videoWidth);
+          const height = Math.round(width * extractor.videoHeight / extractor.videoWidth);
+          const offscreen = document.createElement("canvas");
+          offscreen.width = width;
+          offscreen.height = height;
+          const offscreenContext = offscreen.getContext("2d");
+          for (let index = 0; index < count; index += 1) {
+            await seek(extractor, (extractor.duration - .05) * index / (count - 1));
+            offscreenContext.drawImage(extractor, 0, 0, width, height);
+            frames.push(await createImageBitmap(offscreen));
+            await new Promise((resolve) => setTimeout(resolve, 0));
+          }
+          cacheReady = frames.length === count;
+          if (cacheReady) {
+            canvas.style.opacity = "1";
+            video.style.opacity = "0";
+            poster.style.opacity = "0";
+          }
+        } catch (error) { cacheReady = false; }
+      }
+      function animate() {
+        smoothed += (target - smoothed) * .12;
+        if (cacheReady && frames.length) {
+          coverDraw(frames[Math.round(smoothed * (frames.length - 1))]);
+        } else if (videoReady && Number.isFinite(video.duration)) {
+          const time = smoothed * Math.max(.01, video.duration - .05);
+          if (Math.abs(video.currentTime - time) > .04 && !video.seeking) video.currentTime = time;
+        }
+        requestAnimationFrame(animate);
+      }
+      video.addEventListener("loadeddata", () => {
+        videoReady = true;
+        video.currentTime = .01;
+        video.style.opacity = "1";
+        poster.style.opacity = "0";
+        setTimeout(buildCache, 300);
+      }, { once: true });
+      addEventListener("resize", resize);
+      addEventListener("scroll", updateTarget, { passive: true });
+      resize();
+      updateTarget();
+      video.load();
+      requestAnimationFrame(animate);
+    </script>
+  </body>
+</html>
